@@ -14,7 +14,7 @@ public class diologueTrigger : MonoBehaviour
 	}
 
 	public void StartDiologue()
-	{        
+	{
         diologueManager.Instance.OpenDialogue(messages, speakers);
 	}
 }
@@ -29,6 +29,5 @@ public class Message
 [System.Serializable]
 public class Speaker
 {
-    public string name;
-    public Sprite sprite;
+    public Sprite background;
 }

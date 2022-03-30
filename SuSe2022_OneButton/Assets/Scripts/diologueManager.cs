@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class diologueManager : MonoBehaviour
 {
@@ -21,9 +22,8 @@ public class diologueManager : MonoBehaviour
 
 	#endregion
 
-	public Image speakerImage;
-    public Text speakerName;
-    public Text messageText;
+    public Image speakerBackground;
+    public TextMeshProUGUI messageText;
     public RectTransform dialogueBox;
     public static bool isActive;
 
@@ -41,6 +41,8 @@ public class diologueManager : MonoBehaviour
         isActive = true;
 
         Debug.Log("Started dialogue");
+        dialogueBox.transform.localScale = Vector3.one;
+        DisplayMessage();
 	}
 
     private void DisplayMessage()
@@ -49,8 +51,7 @@ public class diologueManager : MonoBehaviour
         messageText.text = _messageToDisplay.message;
 
         Speaker _speakerToDisplay = _currentSpeakes[_messageToDisplay.SpeakerID];
-        speakerImage.sprite = _speakerToDisplay.sprite;
-        speakerName.text = _speakerToDisplay.name;
+        speakerBackground.sprite = _speakerToDisplay.background;
 	}
 
     private void NextMessage()
@@ -62,7 +63,9 @@ public class diologueManager : MonoBehaviour
 		}
         else
 		{
+            dialogueBox.transform.localScale = Vector3.zero;
             isActive = false;
+            moveTowards.can_move = true;
             Debug.Log("Finished dialogue");
 		}
 	}

@@ -4,9 +4,10 @@ using UnityEngine;
 public class moveTowards : MonoBehaviour
 {
 	public static bool can_move = true;	
+	[SerializeField]
 	private int step_count = 0;		
 	private List<Vector3> directions = new List<Vector3>() {Vector3.right, Vector3.left, Vector3.forward, Vector3.back};
-	private List<int> path = new List<int>() {2, 2};
+	private List<int> path = new List<int>() {2, 2, 0, 0, 0};
 
 
 	private void Update()
