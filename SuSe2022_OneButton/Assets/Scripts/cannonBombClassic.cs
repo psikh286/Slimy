@@ -6,11 +6,15 @@ public class cannonBombClassic : MonoBehaviour
 {
     public GameObject prefab;
     public GameObject target;
+    public Transform firePoint;
     public float frequency;
+    public float delay;
+    Animator animator;
 
 
     private void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         StartCoroutine(SpawnBombs());
     }
 
@@ -23,9 +27,13 @@ public class cannonBombClassic : MonoBehaviour
 
 	private IEnumerator SpawnBombs()
 	{
-
-        Debug.Log("bomb spawned");
-        yield return new WaitForSeconds(frequency);
-	}
-    
+        yield return new WaitForSeconds(4f);
+        while (true)
+		{            
+            yield return new WaitForSeconds(frequency);
+            animator.SetTrigger("Fire");
+            yield return new WaitForSeconds(delay);
+            Instantiate(prefab, firePoint.position, Quaternion.identity);
+        }        
+	}    
 }
