@@ -355,8 +355,8 @@ MonoBehaviour:
   - SpeakerID: 0
     message: bla  bla bla
   speakers:
-  - background: {fileID: 21300000, guid: cdacbf26c95aac34cb949bad619a7bb9, type: 3}
-  - background: {fileID: 21300000, guid: 8c4519be543d68542b68fc6d73a602b8, type: 3}
+  - background: {fileID: 21300000, guid: 2857ba130c5b1e34893c9102d90c52f4, type: 3}
+  - background: {fileID: 21300000, guid: b89ab56bda3945347935d2e9c4be9f83, type: 3}
 --- !u!54 &582821394
 Rigidbody:
   m_ObjectHideFlags: 0
