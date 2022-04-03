@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MovingArea
   - Bullet
+  - Dialogue
   layers:
   - Default
   - TransparentFX

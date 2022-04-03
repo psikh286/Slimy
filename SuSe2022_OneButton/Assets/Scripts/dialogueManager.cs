@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class diologueManager : MonoBehaviour
+public class dialogueManager : MonoBehaviour
 {
     #region Singleton
-    public static diologueManager Instance { get; private set; }
+    public static dialogueManager Instance { get; private set; }
 
 	private void Awake()
 	{
@@ -20,8 +20,9 @@ public class diologueManager : MonoBehaviour
 		}
 	}
 
-	#endregion
+    #endregion
 
+    public GameObject[] UIElements;
     public Image speakerBackground;
     public TextMeshProUGUI messageText;
     public RectTransform dialogueBox;
@@ -33,6 +34,11 @@ public class diologueManager : MonoBehaviour
 
     public void OpenDialogue(Message[] messages, Speaker[] speakers)
 	{
+        foreach (GameObject UIElement in UIElements)
+        {
+            UIElement.SetActive(false);
+        }
+
         _currentMessages = messages;
         _currentSpeakes = speakers;
         _activeMessage = 0;
@@ -63,6 +69,11 @@ public class diologueManager : MonoBehaviour
 		}
         else
 		{
+            foreach (GameObject UIElement in UIElements)
+            {
+                UIElement.SetActive(true);
+            }
+
             dialogueBox.transform.localScale = Vector3.zero;
             isActive = false;
             moveTowards.can_move = true;

@@ -1,26 +1,87 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class moveTowards : MonoBehaviour
 {
-	public static bool can_move = true;	
 	[SerializeField]
-	private int step_count = 0;		
-	private List<Vector3> directions = new List<Vector3>() {Vector3.right, Vector3.left, Vector3.forward, Vector3.back};
-	private List<int> path = new List<int>() {2, 2, 0, 0, 0};
-
+	private RectTransform button;
+	[SerializeField]
+	private Image fillImage;
+	
+		
+	public static bool can_move = true;
+	public float holdTime;
+	
+	private float currentTime = 0;
+	private Vector3[] directions = new Vector3[] {Vector3.forward, Vector3.right, Vector3.back, Vector3.left};
+	private Vector3[] rotation = new Vector3[] {new Vector3(0, 75f, 0), new Vector3(75f, 0, 0), new Vector3(0, -75f, 0), new Vector3(-75f, 0, 0)};
+	private int count = 0;
 
 	private void Update()
 	{
-		if (can_move && Input.GetKeyDown("space"))
-		{
-			can_move = false;
-			int _path = path[step_count];
-			transform.position += directions[_path];
-			step_count++;
-			can_move = true;
+		if (dialogueManager.isActive)
+			return;
+
+		if (can_move)
+		{			
+			if (Input.GetKey("space"))
+			{				
+				currentTime += Time.deltaTime;
+				if (currentTime > holdTime)
+				{
+					StartCoroutine(Move(0.4f));
+					Reset();
+				} 		
+				fillImage.fillAmount = currentTime / holdTime;
+			}
+
+			if (Input.GetKeyUp("space"))
+			{
+				if (currentTime <= holdTime)
+				{
+					ChangeUI();
+				}
+				Reset();
+			}
+
 		}
 	}
 
-	
+	private void Reset()
+	{
+		currentTime = 0;
+		fillImage.fillAmount = currentTime / holdTime;
+	}
+
+	private void ChangeUI()
+	{
+		can_move = false;
+		count++;
+		if (count == rotation.Length)
+			count = 0;
+
+		button.localPosition = rotation[count];
+		can_move = true;
+	}
+
+	private IEnumerator Move(float delay)
+	{
+		can_move = false;
+		RaycastHit hit;
+		if (!Physics.Raycast(transform.position, directions[count], out hit, 1f))
+		{			
+			transform.position += directions[count];
+			yield return new WaitForSeconds(delay);
+		}
+		else
+		{
+			if (hit.transform.tag == "Dialogue")
+			{
+				hit.transform.GetComponent<dialogueTrigger>().StartDialogue();
+			}
+		}
+		can_move = true;
+		yield break;
+	}
 }
