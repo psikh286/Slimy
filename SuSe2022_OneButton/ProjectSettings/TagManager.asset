@@ -7,6 +7,9 @@ TagManager:
   - MovingArea
   - Bullet
   - Dialogue
+  - Raft
+  - Wall
+  - Sign
   layers:
   - Default
   - TransparentFX

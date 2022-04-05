@@ -71,17 +71,24 @@ public class moveTowards : MonoBehaviour
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position, directions[count], out hit, 1f))
 		{			
-			transform.position += directions[count];
+			transform.position += directions[count];			
 			yield return new WaitForSeconds(delay);
+			can_move = true;
 		}
 		else
 		{
 			if (hit.transform.tag == "Dialogue")
 			{
-				hit.transform.GetComponent<dialogueTrigger>().StartDialogue();
+				hit.transform.GetComponent<dialogueTrigger>().StartDialogue();				
+			}else if (hit.transform.tag == "Wall")
+			{
+				can_move = true;
 			}
-		}
-		can_move = true;
+			else if (hit.transform.tag == "Raft")
+			{
+				hit.transform.GetComponent<travelTo>().ChangeScene();
+			}
+		}		
 		yield break;
 	}
 }
