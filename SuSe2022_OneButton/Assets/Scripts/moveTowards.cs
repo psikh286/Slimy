@@ -12,11 +12,29 @@ public class moveTowards : MonoBehaviour
 		
 	public static bool can_move = true;
 	public float holdTime;
-	
+	public int count = 0;
+
 	private float currentTime = 0;
 	private Vector3[] directions = new Vector3[] {Vector3.forward, Vector3.right, Vector3.back, Vector3.left};
-	private Vector3[] rotation = new Vector3[] {new Vector3(0, 75f, 0), new Vector3(75f, 0, 0), new Vector3(0, -75f, 0), new Vector3(-75f, 0, 0)};
-	private int count = 0;
+	private Vector3[] rotation = new Vector3[] {new Vector3(0, 75f, 0), new Vector3(75f, 0, 0), new Vector3(0, -75f, 0), new Vector3(-75f, 0, 0)};	
+
+	#region Singleton
+	public static moveTowards Instance { get; private set; }
+
+	private void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	#endregion
 
 	private void Update()
 	{
@@ -65,6 +83,22 @@ public class moveTowards : MonoBehaviour
 		can_move = true;
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Nature")
+		{
+			other.transform.GetComponentInChildren<MeshRenderer>().enabled = false;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.tag == "Nature")
+		{
+			other.transform.GetComponentInChildren<MeshRenderer>().enabled = true;
+		}
+	}
+
 	private IEnumerator Move(float delay)
 	{
 		can_move = false;
@@ -77,18 +111,36 @@ public class moveTowards : MonoBehaviour
 		}
 		else
 		{
-			if (hit.transform.tag == "Dialogue")
+			switch (hit.transform.tag)
 			{
-				hit.transform.GetComponent<dialogueTrigger>().StartDialogue();				
-			}else if (hit.transform.tag == "Wall")
-			{
-				can_move = true;
+				case "Dialogue":
+					hit.transform.GetComponent<dialogueTrigger>().StartDialogue();
+					break;
+
+				case "Wall":
+					can_move = true;
+					break;
+
+				case "Raft":
+					can_move = true;
+					hit.transform.GetComponent<travelTo>().ChangeScene();
+					break;
+
+				case "Nature":
+					transform.position += directions[count];
+					yield return new WaitForSeconds(delay);
+					can_move = true;
+					break;
+
+				case "Collectable":
+					transform.position += directions[count];
+					yield return new WaitForSeconds(delay);
+					can_move = true;
+					gameManager.Instance.Collect(hit.transform.name);
+					Destroy(hit.transform.gameObject); 
+					break;
 			}
-			else if (hit.transform.tag == "Raft")
-			{
-				hit.transform.GetComponent<travelTo>().ChangeScene();
-			}
-		}		
+		}
 		yield break;
 	}
 }

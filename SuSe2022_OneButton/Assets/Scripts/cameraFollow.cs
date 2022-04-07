@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class cameraFollow : MonoBehaviour
 {
-    //public vars
-    public Transform target;
+    //public vars    
     public float smoothSpeed;
     public Vector3 offset;
 
-    void FixedUpdate()
+    private Transform target;
+
+	private void Start()
+	{
+        target = moveTowards.Instance.transform;
+	}
+
+	void FixedUpdate()
     {
         Camera();
     }
