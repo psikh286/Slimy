@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FireScene.unity
     guid: 76c24a9fd8573f240a19e96a7b63e0b8
   - enabled: 1
+    path: Assets/Scenes/CaveScene.unity
+    guid: cd9c0d7ab381d33478c76f4af805fc01
+  - enabled: 1
     path: Assets/Scenes/WaterScene.unity
     guid: 368fbdb32c36fca49b91b5e82171f05d
   m_configObjects: {}

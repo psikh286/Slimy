@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour
 
 				case 2:
 					moveTowards.Instance.transform.position = new Vector3(20.5f, 0, 11.5f);
-					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0, 0);
+					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;
 
 				case 3:
@@ -67,7 +67,7 @@ public class gameManager : MonoBehaviour
 
 				case 4:
 					moveTowards.Instance.transform.position = new Vector3(14.5f, 0, 31.5f);
-					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0, 0);
+					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;				
 			}
 
@@ -96,20 +96,46 @@ public class gameManager : MonoBehaviour
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
 					break;
 
-				case 5:
+				case 3:
 					moveTowards.Instance.transform.position = new Vector3(17.5f, 0, 4.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 90f, 0);
 					break;
-			}							
+			}
+			
+			if (dynamite)
+			{
+				GameObject[] go = GameObject.FindGameObjectsWithTag("Bullet");
+				foreach (GameObject g in go)
+				{
+					Destroy(g);
+				}			
+				Destroy(GameObject.Find("Dynamite"));				
+			}
 		}
+		else if (scene.buildIndex == 3)
+		{
+			moveTowards.Instance.transform.position = new Vector3(-2.5f, 0, 2.5f);
+			moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 
+			if (fireGem)
+			{				
+				Destroy(GameObject.Find("fireGem"));
+			}
+			if (coin)
+			{
+				Destroy(GameObject.Find("Coin"));
+			}
+		}
+		else if (scene.buildIndex == 4)
+		{
+						
+		}
 		moveTowards.Instance.count = 0;
 		sceneID = scene.buildIndex;
 	}
 
 	public void Collect(string id)
-	{
-		Debug.Log("what is going on");
+	{		
 		switch (id)
 		{
 			case "groundGem":
@@ -130,6 +156,11 @@ public class gameManager : MonoBehaviour
 
 			case "Dynamite":
 				dynamite = true;
+				GameObject[] go = GameObject.FindGameObjectsWithTag("Bullet");
+				foreach (GameObject g in go)
+				{
+					Destroy(g);
+				}
 				break;
 
 			case "Coin":

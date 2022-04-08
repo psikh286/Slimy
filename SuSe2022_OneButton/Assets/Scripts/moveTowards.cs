@@ -118,6 +118,7 @@ public class moveTowards : MonoBehaviour
 					break;
 
 				case "Wall":
+				case "Bullet":
 					can_move = true;
 					break;
 
@@ -140,7 +141,7 @@ public class moveTowards : MonoBehaviour
 						Animator _anim = hit.transform.GetComponent<Animator>();
 						_anim.SetBool(hit.transform.name, true);
 						yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
-					}
+					}					
 					Destroy(hit.transform.gameObject);
 					transform.position += directions[count];
 					can_move = true;
