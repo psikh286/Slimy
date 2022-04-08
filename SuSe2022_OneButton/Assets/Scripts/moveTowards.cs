@@ -48,7 +48,7 @@ public class moveTowards : MonoBehaviour
 				currentTime += Time.deltaTime;
 				if (currentTime > holdTime)
 				{
-					StartCoroutine(Move(0.4f));
+					StartCoroutine(Move(0));
 					Reset();
 				} 		
 				fillImage.fillAmount = currentTime / holdTime;
@@ -101,7 +101,7 @@ public class moveTowards : MonoBehaviour
 
 	private IEnumerator Move(float delay)
 	{
-		can_move = false;
+		can_move = false;		
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position, directions[count], out hit, 1f))
 		{			
@@ -132,12 +132,19 @@ public class moveTowards : MonoBehaviour
 					can_move = true;
 					break;
 
-				case "Collectable":
-					transform.position += directions[count];
-					yield return new WaitForSeconds(delay);
-					can_move = true;
+				case "Collectable":					
 					gameManager.Instance.Collect(hit.transform.name);
-					Destroy(hit.transform.gameObject); 
+					//animation
+					if (hit.transform.GetComponent<Animator>())
+					{
+						Animator _anim = hit.transform.GetComponent<Animator>();
+						_anim.SetBool(hit.transform.name, true);
+						yield return new WaitForSeconds(_anim.GetCurrentAnimatorStateInfo(0).length);
+					}
+					Destroy(hit.transform.gameObject);
+					transform.position += directions[count];
+					can_move = true;
+					yield return new WaitForSeconds(delay);					
 					break;
 			}
 		}

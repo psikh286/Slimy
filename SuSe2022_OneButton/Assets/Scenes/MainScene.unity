@@ -4380,7 +4380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43374bdf84b95a04b86803c6d6024737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 3
+  index: 2
 --- !u!1 &648775157 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c9c7121d8cb7b60419746a12c5388dab, type: 3}
@@ -14582,7 +14582,7 @@ PrefabInstance:
       objectReference: {fileID: 360910183}
     - target: {fileID: 1587383153118377095, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_Name
-      value: slime
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2111154950036729405, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_RootOrder
@@ -14590,7 +14590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2111154950036729405, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.55
+      value: 20.43
       objectReference: {fileID: 0}
     - target: {fileID: 2111154950036729405, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14598,7 +14598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2111154950036729405, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.49
+      value: 11.6
       objectReference: {fileID: 0}
     - target: {fileID: 2111154950036729405, guid: bf41b77ef06f03c4da86be52d160235f, type: 3}
       propertyPath: m_LocalRotation.w

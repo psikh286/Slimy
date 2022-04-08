@@ -88,8 +88,19 @@ public class gameManager : MonoBehaviour
 
 		}
 		else if (scene.buildIndex == 2)
-		{			
-				moveTowards.Instance.transform.position = new Vector3();				
+		{
+			switch (sceneID)
+			{
+				case 0:
+					moveTowards.Instance.transform.position = new Vector3(7.5f, 0, 0.5f);
+					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
+					break;
+
+				case 5:
+					moveTowards.Instance.transform.position = new Vector3(17.5f, 0, 4.5f);
+					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 90f, 0);
+					break;
+			}							
 		}
 
 		moveTowards.Instance.count = 0;
@@ -98,6 +109,7 @@ public class gameManager : MonoBehaviour
 
 	public void Collect(string id)
 	{
+		Debug.Log("what is going on");
 		switch (id)
 		{
 			case "groundGem":
