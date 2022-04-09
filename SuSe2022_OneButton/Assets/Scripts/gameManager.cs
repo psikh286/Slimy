@@ -128,7 +128,13 @@ public class gameManager : MonoBehaviour
 		}
 		else if (scene.buildIndex == 4)
 		{
-						
+			moveTowards.Instance.transform.position = new Vector3(1.5f, 0, -0.5f);
+			moveTowards.Instance.transform.eulerAngles = new Vector3(0, 90f, 0);
+
+			if (waterGem)
+			{
+				
+			}
 		}
 		moveTowards.Instance.count = 0;
 		sceneID = scene.buildIndex;
