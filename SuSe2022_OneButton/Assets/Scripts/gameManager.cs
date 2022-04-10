@@ -35,21 +35,26 @@ public class gameManager : MonoBehaviour
 
 	public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		if (scene.buildIndex == 0)
+		if (scene.buildIndex == 1)
 		{
 			switch (sceneID)
 			{
-				case 1:
-					moveTowards.Instance.transform.position = new Vector3(17.5f, 0, -3.5f);
+				case 0:
+					moveTowards.Instance.transform.position = new Vector3(12.5f, 0, 4.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
 					break;
 
 				case 2:
+					moveTowards.Instance.transform.position = new Vector3(17.5f, 0, -3.5f);
+					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
+					break;
+
+				case 3:
 					moveTowards.Instance.transform.position = new Vector3(20.5f, 0, 11.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;
 
-				case 4:
+				case 5:
 					moveTowards.Instance.transform.position = new Vector3(2.5f, 0, 6.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 270f, 0);
 					break;
@@ -64,16 +69,16 @@ public class gameManager : MonoBehaviour
 				}
 			}
 		}
-		else if (scene.buildIndex == 1)
+		else if (scene.buildIndex == 2)
 		{
 			switch (sceneID)
 			{
-				case 0:
+				case 1:
 					moveTowards.Instance.transform.position = new Vector3(0.5f, 0, -3.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
 					break;
 
-				case 5:
+				case 6:
 					moveTowards.Instance.transform.position = new Vector3(14.5f, 0, 31.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;				
@@ -95,16 +100,16 @@ public class gameManager : MonoBehaviour
 			}
 
 		}
-		else if (scene.buildIndex == 2)
+		else if (scene.buildIndex == 3)
 		{
 			switch (sceneID)
 			{
-				case 0:
+				case 1:
 					moveTowards.Instance.transform.position = new Vector3(7.5f, 0, 0.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
 					break;
 
-				case 3:
+				case 4:
 					moveTowards.Instance.transform.position = new Vector3(17.5f, 0, 4.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 90f, 0);
 					break;
@@ -120,7 +125,7 @@ public class gameManager : MonoBehaviour
 				Destroy(GameObject.Find("Dynamite"));				
 			}
 		}
-		else if (scene.buildIndex == 3)
+		else if (scene.buildIndex == 4)
 		{
 			moveTowards.Instance.transform.position = new Vector3(-2.5f, 0, 2.5f);
 			moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
@@ -134,7 +139,7 @@ public class gameManager : MonoBehaviour
 				Destroy(GameObject.Find("Coin"));
 			}
 		}
-		else if (scene.buildIndex == 4)
+		else if (scene.buildIndex == 5)
 		{
 			moveTowards.Instance.transform.position = new Vector3(1.5f, 0, -0.5f);
 			moveTowards.Instance.transform.eulerAngles = new Vector3(0, 90f, 0);
@@ -144,7 +149,7 @@ public class gameManager : MonoBehaviour
 				Destroy(GameObject.Find("waterGem"));
 			}
 		}
-		else if (scene.buildIndex == 5)
+		else if (scene.buildIndex == 6)
 		{
 			moveTowards.Instance.transform.position = new Vector3(0f, 0.5f, 0f);
 			moveTowards.Instance.transform.eulerAngles = new Vector3(0f, 270f, 0f);
@@ -197,14 +202,21 @@ public class gameManager : MonoBehaviour
 				coin = true;
 				break;
 		}
+
+		if (waterGem && groundGem && fireGem && windGem)
+		{
+			moveTowards.can_move = false;
+			pauseMenu.Instance.game_over.SetActive(true);
+		}
 	}
 
 	public void Talked()
 	{
-		if (sceneID == 5 && hit.transform.name == "bee")
+		if (sceneID == 6 && hit.transform.name == "bee")
 		{
 			Destroy(hit.transform.gameObject);
 		}
 	}
+
 
 }

@@ -1874,9 +1874,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messages:
   - SpeakerID: 1
-    message: 'Is it a gold coin? Can I not have it? '
+    message: 'Is it a gold coin? Can I have it? '
   - SpeakerID: 0
-    message: No
+    message: Yes
   - SpeakerID: 0
     message: Thank you!
   speakers:
@@ -2777,11 +2777,11 @@ MonoBehaviour:
   - SpeakerID: 0
     message: Please could you move aside?
   - SpeakerID: 1
-    message: Yes
+    message: ...
   - SpeakerID: 0
     message: ...
   - SpeakerID: 1
-    message: I'm not asking for gold.
+    message: Only for  gold
   speakers:
   - background: {fileID: 21300000, guid: b89ab56bda3945347935d2e9c4be9f83, type: 3}
   - background: {fileID: 21300000, guid: 2857ba130c5b1e34893c9102d90c52f4, type: 3}
