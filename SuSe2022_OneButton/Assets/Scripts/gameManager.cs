@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +9,7 @@ public class gameManager : MonoBehaviour
 	public bool windGem = false;
 	public bool coin = false;
 	public bool dynamite = false;
+	public RaycastHit hit;
 
 	public int sceneID = 0;
 
@@ -50,10 +49,19 @@ public class gameManager : MonoBehaviour
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;
 
-				case 3:
+				case 4:
 					moveTowards.Instance.transform.position = new Vector3(2.5f, 0, 6.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 270f, 0);
 					break;
+			}
+
+			if (waterGem)
+			{
+				Transform[] tr = GameObject.Find("Lilipads").GetComponentsInChildren<Transform>(true);
+				foreach (Transform t in tr)
+				{
+					t.gameObject.SetActive(true);
+				}
 			}
 		}
 		else if (scene.buildIndex == 1)
@@ -65,7 +73,7 @@ public class gameManager : MonoBehaviour
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 180f, 0);
 					break;
 
-				case 4:
+				case 5:
 					moveTowards.Instance.transform.position = new Vector3(14.5f, 0, 31.5f);
 					moveTowards.Instance.transform.eulerAngles = new Vector3(0, 0f, 0);
 					break;				
@@ -133,10 +141,26 @@ public class gameManager : MonoBehaviour
 
 			if (waterGem)
 			{
-				
+				Destroy(GameObject.Find("waterGem"));
 			}
 		}
+		else if (scene.buildIndex == 5)
+		{
+			moveTowards.Instance.transform.position = new Vector3(0f, 0.5f, 0f);
+			moveTowards.Instance.transform.eulerAngles = new Vector3(0f, 270f, 0f);
+
+			if (coin)
+			{
+				Destroy(GameObject.Find("block"));
+			}
+			if (windGem)
+			{
+				Destroy(GameObject.Find("windGem"));
+			}
+
+		}
 		moveTowards.Instance.count = 0;
+		moveTowards.Instance.ChangeUI();
 		sceneID = scene.buildIndex;
 	}
 
@@ -172,6 +196,14 @@ public class gameManager : MonoBehaviour
 			case "Coin":
 				coin = true;
 				break;
+		}
+	}
+
+	public void Talked()
+	{
+		if (sceneID == 5 && hit.transform.name == "bee")
+		{
+			Destroy(hit.transform.gameObject);
 		}
 	}
 

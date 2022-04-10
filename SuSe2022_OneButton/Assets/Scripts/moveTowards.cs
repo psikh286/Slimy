@@ -72,7 +72,7 @@ public class moveTowards : MonoBehaviour
 		fillImage.fillAmount = currentTime / holdTime;
 	}
 
-	private void ChangeUI()
+	public void ChangeUI()
 	{
 		can_move = false;
 		count++;
@@ -101,7 +101,27 @@ public class moveTowards : MonoBehaviour
 
 	private IEnumerator Move(float delay)
 	{
-		can_move = false;		
+		can_move = false;
+		//rotation		
+		switch (count)
+		{
+			case 0:
+				transform.eulerAngles = new Vector3(0f, 180f, 0f);
+				break;
+
+			case 1:
+				transform.eulerAngles = new Vector3(0f, 270f, 0f);
+				break;
+
+			case 2:
+				transform.eulerAngles = new Vector3(0f, 0f, 0f);
+				break;
+
+			case 3:
+				transform.eulerAngles = new Vector3(0f, 90f, 0f);
+				break;
+		}
+				
 		RaycastHit hit;
 		if (!Physics.Raycast(transform.position, directions[count], out hit, 1f))
 		{			
@@ -115,6 +135,7 @@ public class moveTowards : MonoBehaviour
 			{
 				case "Dialogue":
 					hit.transform.GetComponent<dialogueTrigger>().StartDialogue();
+					gameManager.Instance.hit = hit;
 					break;
 
 				case "Wall":

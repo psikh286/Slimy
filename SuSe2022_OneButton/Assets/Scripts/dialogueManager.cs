@@ -77,6 +77,7 @@ public class dialogueManager : MonoBehaviour
             dialogueBox.transform.localScale = Vector3.zero;
             isActive = false;
             moveTowards.can_move = true;
+            gameManager.Instance.Talked();
             Debug.Log("Finished dialogue");
 		}
 	}

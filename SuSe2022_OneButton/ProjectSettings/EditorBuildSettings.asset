@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WaterScene.unity
     guid: 368fbdb32c36fca49b91b5e82171f05d
+  - enabled: 1
+    path: Assets/Scenes/AirScene.unity
+    guid: b26b052ab97a18a48ab33fea91fa1f80
   m_configObjects: {}
